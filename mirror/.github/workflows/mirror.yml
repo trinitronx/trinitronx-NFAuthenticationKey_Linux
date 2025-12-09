@@ -1,0 +1,21 @@
+# .github/workflows/mirror.yml
+name: 'mirror'
+on:
+  push:
+    branches:
+        - __mirror
+  schedule:
+    - cron: '42 2 */10 * *'
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    name: mirror
+    steps:
+      - name: mirror
+        id: mirror
+        uses: bridgelightcloud/github-mirror-action@v3
+        with:
+          origin: 'CastagnaIT/NFAuthenticationKey'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
